@@ -7,7 +7,20 @@ import '../pages/VideoRoom.css';
 const VideoRoomPage = () => {
     const { socket } = useSocket();
     const { peer, createOffer, createAnswer, setRemoteAns, sendStream, remoteStream, handleTrackEvent } = usePeer();
-    
+    // 모델 선택 메뉴
+    const [isModelMenuVisible, setIsModelMenuVisible] = useState(false);
+    // 모델 목록 정의
+    const models = [
+        { id : 1, name: "Original"},
+        { id : 2, name: "Arcane"},
+        { id : 3, name: "Pixar"},
+        { id : 4, name: "Disney"}
+    ];
+    // 메뉴 표시 토글
+    const toggleModelMenu = () => {
+        setIsModelMenuVisible(!isModelMenuVisible);
+    };
+
     const [myStream, setMyStream] = useState(null);
     // const [remoteStream, setRemoteStream] = useState(null);
     const [remoteEmailId, setRemoteEmaildId] = useState();
@@ -101,7 +114,19 @@ const VideoRoomPage = () => {
                 <img src="/images/video.png" alt="videobutton" />
             </button>
             <img src="/images/chat.png" alt="chat" className="chat" />
-            <img src="/images/plus.png" alt="end" className="plus" />
+            <button onClick={toggleModelMenu} className="plus">
+                <img src="/images/plus.png" alt="plus" />
+            </button>
+            {isModelMenuVisible && (
+                <div className="model-selection-menu">
+                <h4>당신의 아바타를 선택하세요!</h4>
+                <ul>
+                    {models.map((model) => (
+                        <li key={model.id}>{model.name}</li>
+                    ))}
+                </ul>
+                </div>
+            )}
             <img src="/images/end.png" alt="end" className="end" />
         </div>
     
