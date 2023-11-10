@@ -127,10 +127,26 @@ const VideoRoomPage = () => {
 
         <div className="video-stream">
             {/* <h1>VideoRoom Page</h1> */}
-            <h4>{remoteEmailId} 함께 회의중 </h4>
+            {/* <h4>{remoteEmailId} 함께 회의중 </h4> */}
             <ReactPlayer url={myStream} playing muted />
             <ReactPlayer url={remoteStream} playing />
         </div>
+
+        <div className="right-sidebar">
+                <div className="participant-list">
+                    <h2>참여자 목록</h2>
+                    <ul>
+                        <li>{remoteEmailId}</li>
+                    </ul>
+                </div>
+                <div className="chat-box">
+                    <h2>채팅</h2>
+                    <div className="chat-messages">
+                    </div>
+                    <input type="text" placeholder="메시지를 입력하세요" />
+                    <button>Send</button>
+                </div>
+            </div>
     
         {/* <h1>VideoRoom Page</h1>
         <h4>Your are connected to {remoteEmailId}</h4>
