@@ -94,8 +94,8 @@ const VideoRoomPage = () => {
                <img src="/images/Ganzi1.png" alt="로고이미지"/>
             </div>
             <div className="meeting-title">Ganzi meeting</div>
-            <div className="meeting-date">9월 11일, 2023 |</div>
-            <div className="meeting-time">11:00 PM</div>
+            <div className="meeting-date">11월 16일, 2023 |</div>
+            <div className="meeting-time">08:00 PM</div>
             <div className="user-name">Minah</div>
         </div>
 
