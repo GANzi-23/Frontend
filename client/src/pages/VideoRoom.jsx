@@ -52,7 +52,7 @@ const VideoRoomPage = () => {
 
     const getUserMediaStream = useCallback(async() => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-        sendStream(stream);
+        sendStream(myStream);
         setMyStream(stream);
     }, []);
 
