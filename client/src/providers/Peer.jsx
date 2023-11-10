@@ -55,7 +55,7 @@ export const PeerProvider = (props) => {
     // },[])
 
     useEffect(() => {
-        peer.addEventListener("track", handleTrackEvent);
+        peer.addEventListener('track', handleTrackEvent);
         // peer.addEventListener('negotiationneeded',handleNegosiation);
         return () => {
             // peer.removeEventListener('track', handleTrackEvent)
@@ -63,7 +63,7 @@ export const PeerProvider = (props) => {
     },[handleTrackEvent, peer]);
 
     return (
-    <PeerContext.Provider value = {{ peer, createOffer, createAnswer, setRemoteAns, sendStream }}>
+    <PeerContext.Provider value = {{ peer, createOffer, createAnswer, setRemoteAns, sendStream, remoteStream }}>
         {props.children}
     </PeerContext.Provider>
     );  

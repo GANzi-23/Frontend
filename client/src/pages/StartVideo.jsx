@@ -7,7 +7,7 @@ const StartVideopage = () => {
     const { socket } = useSocket();
     // socket.emit('join-room', { roomId: "1", emailId: "ming" });
     // console.log("socket", socket);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState();
     const [roomId, setRoomId] = useState();
@@ -24,7 +24,7 @@ const StartVideopage = () => {
         }
     }, [handleRoomJoined, socket]);
     
-    const hadleJoinRoom = () => {
+    const handleJoinRoom = () => {
         socket.emit('join-room', { emailId: email, roomId })
     }
 
@@ -48,7 +48,7 @@ const StartVideopage = () => {
                 <div className="input-container">
                     <input value = {email} onChange = {e => setEmail(e.target.value)} type="name" placeholder='+ 회의에 사용할 이름 입력'></input>
                     <input value = {roomId} onChange = {e => setRoomId(e.target.value)} type="text" placeholder='+ 회의 링크 입력'></input>
-                    <button onClick={hadleJoinRoom}>참여</button>
+                    <button onClick={handleJoinRoom}>참여</button>
                 </div>
             </div>
         </div>

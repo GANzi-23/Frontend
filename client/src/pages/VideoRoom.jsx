@@ -37,7 +37,7 @@ const VideoRoomPage = () => {
         const { from, offer } = data;
         console.log("Incomming Call From", from, offer);
         const ans = await createAnswer(offer);
-        socket.emit('call-accept', { emailId: from, ans });
+        socket.emit('call-accepted', { emailId: from, ans });
         setRemoteEmaildId(from)
     }, [createAnswer, socket]);
 
@@ -52,9 +52,9 @@ const VideoRoomPage = () => {
 
     const getUserMediaStream = useCallback(async() => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-        // sendStream(stream);
+        sendStream(stream);
         setMyStream(stream);
-    }, [])
+    }, []);
 
     const handleNegosiation = useCallback(() =>
     {
@@ -70,10 +70,10 @@ const VideoRoomPage = () => {
         return () => {
             socket.off("user-joined", handleNewUserJoined);
             socket.off("incomming-call", handleIncommingCall);
-            socket.off("call-accepted", handleIncommingCall);
+            socket.off("call-accepted", handleCallAccepted);
         }
 
-    }, [handleIncommingCall, handleIncommingCall, handleNewUserJoined, socket]);
+    }, [handleCallAccepted, handleIncommingCall, handleNewUserJoined, socket]);
 
     useEffect(() => {
         peer.addEventListener("negotiationneeded",handleNegosiation);
@@ -100,12 +100,7 @@ const VideoRoomPage = () => {
         </div>
 
         {/* 비디오 스트림 화면 */}
-        <div className="video-stream">
-            {/* <h1>VideoRoom Page</h1> */}
-            <h4>{remoteEmailId} 함께 회의중 </h4>
-            <ReactPlayer url={myStream} playing muted />
-            <ReactPlayer url={remoteStream} playing />
-        </div>
+        
 
         {/* 하단 바 */}
         <div className="bottom-bar">
@@ -128,6 +123,13 @@ const VideoRoomPage = () => {
                 </div>
             )}
             <img src="/images/end.png" alt="end" className="end" />
+        </div>
+
+        <div className="video-stream">
+            {/* <h1>VideoRoom Page</h1> */}
+            <h4>{remoteEmailId} 함께 회의중 </h4>
+            <ReactPlayer url={myStream} playing muted />
+            <ReactPlayer url={remoteStream} playing />
         </div>
     
         {/* <h1>VideoRoom Page</h1>
