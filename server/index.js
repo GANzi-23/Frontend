@@ -12,10 +12,9 @@ app.use(bodyParser.json());
 const emailToSocketMapping = new Map();
 const socketToEmailMapping = new Map();
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
     console.log("New Connection");
     socket.on("join-room", data => {
-
         const { roomId, emailId } = data;
         console.log("User", emailId, "참여", roomId)
         emailToSocketMapping.set(emailId, socket.id);
@@ -34,7 +33,7 @@ io.on("connection", socket => {
 
     socket.on('call-accepted', data => {
         const{ emailId, ans } = data;
-        const socketId = socketToEmailMapping.get(emailId);
+        const socketId = emailToSocketMapping.get(emailId);
         socket.to(socketId).emit('call-accepted', { ans });
     });
 });

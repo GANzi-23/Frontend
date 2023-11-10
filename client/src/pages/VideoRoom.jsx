@@ -46,7 +46,7 @@ const VideoRoomPage = () => {
         const { ans } = data;
         console.log('Call Got Accepted', ans);
         await setRemoteAns(ans);
-        // sendStream(myStream);
+        sendStream(myStream);
     }, [setRemoteAns]
     );
 
